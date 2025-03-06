@@ -11,4 +11,10 @@ router.post('/', function(req, res, next) {
   res.render('index', { title: '環境依存文字判別ツール' });
 });
 
+router.get('/admin', function(req, res, next) {
+  res.render('admin', { title: '管理者画面' });
+});
+
+
+
 module.exports = router;
