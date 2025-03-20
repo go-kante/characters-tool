@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mysql = require('mysql');
 
 const app = express();
 
@@ -33,6 +34,33 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+// mysqlに接続
+const con = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: 'sk0422OK',
+  database: 'app',
+  multipleStatements: true
+});
+
+con.connect((err) => {
+  if (err) {
+      console.log('error connecting: ' + err.stack);
+      return;
+  }
+  console.log('success');
+});
+
+app.get('/', (req, res) => {
+  connection.query(
+    'SELECT * FROM users',
+    (error, results) => {
+      console.log(results);
+      res.render('hello.ejs');
+    }
+  );
 });
 
 module.exports = app;

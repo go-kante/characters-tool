@@ -1,10 +1,10 @@
 var character = ['aiueo'] // 環境依存文字の配列
   
 const editableBox = document.getElementById('floatingTextarea2');
-console.log(floatingTextarea2);// 入力されたテキスト
+
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   const output = document.getElementById('output');
-  console.log(output);}
+  }
   
 if (typeof window !== "undefined" && typeof document !== "undefined") {
   const btn = document.getElementById('btn').addEventListener('click', (event) => {
