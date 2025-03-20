@@ -11,12 +11,6 @@ app.use('/public', express.static('public'))
 
 
 
-
-
-app.listen(8080, function () {
-    console.log('listening on 8080')
-});
-
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: '環境依存文字判別ツール' });

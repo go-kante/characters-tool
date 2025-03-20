@@ -40,8 +40,8 @@ app.use(function(err, req, res, next) {
 const con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'sk0422OK',
-  database: 'app',
+  password: process.env.DB_PASS,
+  database: 'detect_d_chara',
   multipleStatements: true
 });
 
