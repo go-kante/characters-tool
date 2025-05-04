@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const mysql = require('mysql');
 
 const app = express();
 
@@ -35,31 +36,31 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+// mysqlに接続
+const con = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  password: process.env.DB_PASS,
+  database: 'detect_d_chara',
+  multipleStatements: true
+});
 
- // 色変えるロジック
-var character = ['aiueo'] // 環境依存文字の配列
-if (typeof window !== "undefined" && typeof document !== "undefined") {
-  const editableBox = document.getElementById('floatingTextarea2');
-  console.log(editableBox);}// 入力されたテキスト
-if (typeof window !== "undefined" && typeof document !== "undefined") {
-  const output = document.getElementById('output');
-  console.log(output);}
-  
-if (typeof window !== "undefined" && typeof document !== "undefined") {
-  const btn = document.getElementById('btn');
-  console.log(btn);
-  event.preventDefault();
-  const content = editableBox.value;
-  const regex = new RegExp(`[${character.join('')}]`, 'g'); // 配列を正規表現に変換
+con.connect((err) => {
+  if (err) {
+      console.log('error connecting: ' + err.stack);
+      return;
+  }
+  console.log('success');
+});
 
-  if (regex.test(content)) {
-    output.textContent = "環境依存文字が含まれています。";
-    output.style.color = "red";
-  } else {
-    output.textContent = "環境依存文字は含まれていません。";
-    output.style.color = "green";
+app.get('/', (req, res) => {
+  connection.query(
+    'SELECT * FROM users',
+    (error, results) => {
+      console.log(results);
+      res.render('hello.ejs');
     }
-};
-
+  );
+});
 
 module.exports = app;
