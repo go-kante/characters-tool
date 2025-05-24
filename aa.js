@@ -1,7 +1,7 @@
 var router = require('express').Router();
 
 // mysql
-const con = require('./../server.js')
+const con = require('./app/server.js')
 
 // loginを管理できるライブラリー
 const passport = require('passport');

@@ -4,7 +4,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mysql = require('mysql');
-
+const session = require('express-session');
 const app = express();
 
 // view engine setup
@@ -16,6 +16,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+  secret: '1234',
+  resave: false,
+  saveUninitialized: true
+}));
+
+// これより後にルーター読み込み
+app.use('/', require('./routes/index'));
 
 // router
 app.use('/', require('./routes'));
