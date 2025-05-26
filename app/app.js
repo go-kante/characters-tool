@@ -44,23 +44,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// mysqlに接続
-const con = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: process.env.DB_PASS,
-  database: 'detect_d_chara',
-  multipleStatements: true
-});
-
-con.connect((err) => {
-  if (err) {
-      console.log('error connecting: ' + err.stack);
-      return;
-  }
-  console.log('success');
-});
-
 app.get('/', (req, res) => {
   connection.query(
     'SELECT * FROM users',
